@@ -14,6 +14,7 @@ bot.start((ctx) => ctx.reply('Welcome!'));
 bot.command('upload', (ctx) => {
     if (ctx.from.id != "399871144") {
         ctx.reply("I'm sorry John");
+        console.log("Unauthorized use of bot");
         return;
     }
 
@@ -29,7 +30,8 @@ bot.command('upload', (ctx) => {
         db.close();
     });
     
-    ctx.reply("Received!")
+    ctx.reply("Received!");
+    console.log('New record added');
 
 });
 

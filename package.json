@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cron": "^1.8.2",
     "mongodb": "^3.6.0",
     "telegraf": "^3.38.0"
   }
