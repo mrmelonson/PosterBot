@@ -47,6 +47,46 @@ bot.command('upload', (ctx) => {
 
 });
 
+//command for uploading many records
+bot.command('uploadmany', (ctx) => {
+
+    //just incase anyone but me tries anything wack
+    if (ctx.from.id != key.User_ID) {
+        ctx.reply("I'm sorry John");
+        Logger.warn("Unauthorized use of bot");
+        return;
+    }
+
+    //basic message filtering
+    var links = ctx.message.text.split('\n');
+    links.shift();
+    console.log(links);
+
+    //adding record to database
+    var client = new MongoClient(url);
+
+    var pisspics = [];
+    var recordCount = 0;
+        
+    links.forEach(link => {
+        pisspics.push({ url: link });
+        recordCount++;
+    })
+
+    client.connect((err, db) => {
+        if (err) throw err;
+        var dbo = db.db("Telegram_DB");
+
+        dbo.collection("Piss").insertMany(pisspics);
+        db.close();
+    });
+    
+    //confirming database recieved
+    ctx.reply("Received!");
+    Logger.log('New records added - ' + recordCount);
+
+});
+
 //Cron job task scheduler
 var job = new CronJob('*/1 * * * *', function() {
 
