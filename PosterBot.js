@@ -12,10 +12,11 @@ const logging = require('./logging');
 const bot = new Telegraf(key.key);
 
 //try /start in the bot's dms
+/*
 bot.start((ctx) => {
     ctx.reply(ctx.chat.id);
-    //ctx.telegram.sendMessage("-472572071", "Hello World!");
 });
+*/
 
 //upload command
 bot.command('upload', (ctx) => {
@@ -123,6 +124,10 @@ var job = new CronJob(key.CronString, function() {
         await db.close();
     });
 }, null, true, 'Australia/Sydney');
+
+bot.help((ctx) => {
+    console.log(ctx.message.chat.id);
+})
 
 
 //Start the bot with a little message
