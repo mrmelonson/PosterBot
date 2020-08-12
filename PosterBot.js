@@ -88,7 +88,7 @@ bot.command('uploadmany', (ctx) => {
 });
 
 //Cron job task scheduler
-var job = new CronJob('*/1 * * * *', function() {
+var job = new CronJob(key.CronString, function() {
 
     //connecting to database
     var client = new MongoClient(url);
